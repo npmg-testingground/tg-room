@@ -1,0 +1,52 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["node", "flowtype", "flowtype-errors"],
+  "extends": ["eslint:recommended", "plugin:node/recommended"],
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": false
+  },
+  "rules": {
+    "node/exports-style": ["error", "module.exports"],
+    "node/no-unsupported-features": "off",
+    "no-console": "off",
+    "flowtype-errors/show-errors": 2,
+    "flowtype/boolean-style": [1, "bool"],
+    "flowtype/delimiter-dangle": [1, "never"],
+    "flowtype/generic-spacing": [1, "never"],
+    "flowtype/no-dupe-keys": 2,
+    "flowtype/no-primitive-constructor-types": 1,
+    "flowtype/no-types-missing-file-annotation": 2,
+    "flowtype/no-weak-types": [2, {
+      "any": false,
+      "Object": false,
+      "Function": true
+    }],
+    "flowtype/object-type-delimiter": [1, "comma"],
+    "flowtype/require-parameter-type": [1, {"excludeArrowFunctions": true, "excludeParameterMatch": "^_.+"}],
+    "flowtype/require-return-type": [1, "always", {"excludeArrowFunctions": true}],
+    "flowtype/require-valid-file-annotation": [2, "always", {"annotationStyle": "line"}],
+    "flowtype/require-variable-type": [1, {"excludeVariableTypes": {
+      "var": true,
+      "let": true,
+      "const": false
+    }}],
+    "flowtype/semi": [2, "always"],
+    "flowtype/space-after-type-colon": [2, "always"],
+    "flowtype/space-before-generic-bracket": [2, "never"],
+    "flowtype/space-before-type-colon": [2, "never"],
+    "flowtype/type-id-match": [
+      2,
+      "^([A-Z][a-z0-9]*)+Type$"
+    ],
+    "flowtype/union-intersection-spacing": [2, "always"],
+    "flowtype/use-flow-type": 1,
+    "flowtype/valid-syntax": 1
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
+  }
+}

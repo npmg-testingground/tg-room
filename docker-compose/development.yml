@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+  tg-room:
+    build: ../
+    ports:
+      - "8007:8007"
+    depends_on:
+      - tg-room-rethinkdb
+    networks:
+      - restserve_ecosystem
+    environment:
+      - DB_HOST=tg-room-rethinkdb
+    volumes:
+      - ../:/var/www/
+
+  tg-room-rethinkdb: 
+    image: rethinkdb
+    networks: 
+      - restserve_ecosystem
+    ports: 
+      - "8080:8080"
+      - "28015:28015"
+      - "29015:29015"
+       
+networks: 
+  restserve_ecosystem: 
+    driver: bridge
