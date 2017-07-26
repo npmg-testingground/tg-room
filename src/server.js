@@ -9,11 +9,13 @@ server.connection({
 });
 
 server.route(routes);
-
-server.start((err: string) => {
-
+if (!module.parent) {
+  server.start((err: string) => {
     if (err) {
         throw err;
     }
     console.log(`Server running at: ${server.info.uri}`);
-});
+  });
+}
+
+module.exports = server;
