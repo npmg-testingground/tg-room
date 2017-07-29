@@ -8,7 +8,7 @@
   "scripts": {
     "test": "ava --verbose",
     "build": "webpack",
-    "bootstrap": "node ./build/bootstrap.js",
+    "bootstrap": "webpack && node ./build/bootstrap.js",
     "start": "node ./build/backend.js",
     "debug": "webpack && node --inspect=0.0.0.0:9229 ./build/backend.js",
     "docker": "docker-compose -f docker-compose/development.yml up -d",
@@ -16,6 +16,7 @@
     "dev-watch-backend": "nodemon --inspect-brk=9229 ./build/backend.js"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",

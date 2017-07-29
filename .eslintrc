@@ -11,7 +11,7 @@
     "node/exports-style": ["error", "module.exports"],
     "node/no-unsupported-features": "off",
     "no-console": "off",
-    "flowtype-errors/show-errors": 2,
+    "flowtype-errors/show-errors": 1,
     "flowtype/boolean-style": [1, "bool"],
     "flowtype/delimiter-dangle": [1, "never"],
     "flowtype/generic-spacing": [1, "never"],

@@ -77,6 +77,7 @@ export function patchRoom(request: Object, reply: ReplyFunctionType) {
 	const { payload }: {
     payload: RoomPayloadType
   } = request;
+  
 	r.table(env.DB_TABLE_NAME)
 		.get(roomId)
 		.update(payload, {returnChanges: true})
