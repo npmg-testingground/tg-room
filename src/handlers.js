@@ -2,6 +2,7 @@
 import env from './env.config';
 import Boom from 'boom';
 import r from './db/config';
+import { checkIfRoomExists } from './helpers';
 
 // Types
 import type { RoomPayloadType } from './db/model';
@@ -30,6 +31,10 @@ export async function createRoom(request: Object, reply: ReplyFunctionType): voi
 	const { payload }: {
     payload: RoomPayloadType
   } = request;
+  const roomExists: bool = await checkIfRoomExists(payload);
+  if (roomExists) {
+    reply(Boom.badData("There is already a room with these parameters!"))
+  }
 	r.table(env.DB_TABLE_NAME).insert(
     r.expr(payload).merge({
       createdAt: r.now()

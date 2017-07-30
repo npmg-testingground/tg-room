@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "test": "ava --verbose",
+    "docker-test": "yarn run build && yarn run bootstrap && yarn test",
     "build": "webpack",
     "bootstrap": "webpack && node ./build/bootstrap.js",
     "start": "node ./build/backend.js",

@@ -3,6 +3,7 @@ version: "3.3"
 services:
   tg-room:
     build: ../
+    command: yarn run docker-test
     ports:
       - "8007:8007"
     depends_on:
@@ -11,8 +12,7 @@ services:
       - restserve_ecosystem
     environment:
       - DB_HOST=tg-room-rethinkdb
-    # volumes:
-    #   - ../:/var/www/
+      - NODE_ENV=testing
 
   tg-room-rethinkdb: 
     image: rethinkdb
