@@ -7,8 +7,8 @@
 import Joi from 'joi';
 
 const schema: Object = Joi.object({
-	SERVICE_PORT: Joi.number().default(8007),
-	NODE_ENV: Joi.string().default("development"),
+	SERVICE_PORT: Joi.number().default(80),
+	NODE_ENV: Joi.string().default("production"),
 	HOST: Joi.string().default('localhost'),
 	DB_DRIVER_PORT: Joi.number().positive().default(28015),
 	DB_HOST: Joi.string().default("localhost"),
