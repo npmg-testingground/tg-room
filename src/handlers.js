@@ -4,11 +4,7 @@ import Boom from 'boom';
 import r from './db/config';
 import { checkIfRoomExists } from './helpers';
 
-// Types
-import type { RoomPayloadType } from './db/model';
-export type ReplyFunctionType = (_: (string | {})) => string;
-
-export function getAllRooms(_request, reply: ReplyFunctionType) {
+export function getAllRooms(_request, reply) {
 	r.table(env.DB_TABLE_NAME).then(result => {
 		reply(result);
 	}).catch(err => {
@@ -16,10 +12,8 @@ export function getAllRooms(_request, reply: ReplyFunctionType) {
 	});
 }
 
-export function getRoom(request: Object, reply: ReplyFunctionType) {
-	const { roomId } : {
-    roomId: string
-  } = request.params;
+export function getRoom(request, reply) {
+	const { roomId } = request.params;
 	r.table(env.DB_TABLE_NAME).get(roomId).then(result => {
 		reply(result);
 	}).catch(err => {
@@ -27,11 +21,9 @@ export function getRoom(request: Object, reply: ReplyFunctionType) {
 	});
 }
 
-export async function createRoom(request: Object, reply: ReplyFunctionType): void {
-	const { payload }: {
-    payload: RoomPayloadType
-  } = request;
-  const roomExists: bool = await checkIfRoomExists(payload);
+export async function createRoom(request, reply) {
+	const { payload } = request;
+  const roomExists = await checkIfRoomExists(payload);
   if (roomExists) {
     reply(Boom.badData("There is already a room with these parameters!"))
   }
@@ -55,11 +47,9 @@ export async function createRoom(request: Object, reply: ReplyFunctionType): voi
  * you should pass the every property of the
  * object you want to change
  */
-export function putRoom(request: Object, reply: ReplyFunctionType) {
-	const { roomId }: { roomId: string } = request.params;
-	const { payload }: {
-    payload: RoomPayloadType
-  } = request;
+export function putRoom(request, reply) {
+	const { roomId } = request.params;
+	const { payload } = request;
 	payload.id = roomId;
 	r.table(env.DB_TABLE_NAME)
     .get(roomId)
@@ -77,15 +67,13 @@ export function putRoom(request: Object, reply: ReplyFunctionType) {
  * you should pass only the properties 
  * you want to be changed
  */
-export function patchRoom(request: Object, reply: ReplyFunctionType) {
-	const { roomId } : {roomId: string} = request.params;
-	const { payload }: {
-    payload: RoomPayloadType
-  } = request;
+export function patchRoom(request, reply) {
+	const { roomId } = request.params;
+	const { payload } = request;
   
 	r.table(env.DB_TABLE_NAME)
 		.get(roomId)
-		.update(payload, {returnChanges: true})
+		.update(payload, {returnChanges: 'always'})
 		.then(changes => {
 				reply(changes)
 		})
@@ -94,8 +82,8 @@ export function patchRoom(request: Object, reply: ReplyFunctionType) {
 		});
 }
 
-export function delelteRoom(request: Object, reply: ReplyFunctionType) {
-	const { roomId }: { roomId: string } = request.params;
+export function delelteRoom(request, reply) {
+	const { roomId } = request.params;
 	r.table(env.DB_TABLE_NAME)
 		.get(roomId)
 		.delete({returnChanges: true})

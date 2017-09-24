@@ -6,20 +6,7 @@ import {
 	RoomModelRequired
 } from './db/model';
 
-import type { ReplyFunctionType } from './handlers';
-
-export type RouteType = {
-  method: string,
-  path: string,
-  handler: ReplyFunctionType,
-  config?: {
-    validate: {
-      payload: Object
-    }
-  }
-};
-
-const routes: Array<RouteType> = [
+const routes = [
 	{
 		method: 'GET',
 		path: '/rooms',

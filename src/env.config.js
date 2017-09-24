@@ -6,7 +6,7 @@
  */
 import Joi from 'joi';
 
-const schema: Object = Joi.object({
+const schema = Joi.object({
 	SERVICE_PORT: Joi.number().default(80),
 	NODE_ENV: Joi.string().default("production"),
 	HOST: Joi.string().default('localhost'),
@@ -20,9 +20,6 @@ const schema: Object = Joi.object({
 const {
   error,
   value: env 
-} : {
-  value: Object, // this becomes env
-  error: string
 } = Joi.validate(process.env, schema);
 	if (error) throw error;
 
